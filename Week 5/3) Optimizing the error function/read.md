@@ -10,6 +10,6 @@
 <br>
 <h3>Here Two main question is we havve to understand the purpose </h3>
 <br>
-<h3>Now we have understand x*x pseudo inverse </h3>
+<h3># Now we have understand x*x pseudo inverse </h3>
 <br>
-<h3>where x^T*Y</h3>
+<h3># where x^T*Y</h3>
