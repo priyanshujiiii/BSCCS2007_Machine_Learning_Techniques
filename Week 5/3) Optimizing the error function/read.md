@@ -1,6 +1,8 @@
 <h1>3) Optimizing the error function</h1>
 <br>
+
 ![image](https://user-images.githubusercontent.com/89120960/223543573-d9e029e0-026e-491b-8da3-db0dd9a16f6d.png)
+
 <br> 
 <h3>We are just using a expression here we are usng gradient descent algprithm. </h3>
 <br>
