@@ -38,12 +38,8 @@ plt.show()
 print('Expected f(X):', expected_f_X)
 print('Mean f(X):', mean_f_X)
 
-In this code, we define a simple convex function convex_function(x) = x^2. Then, we define the Jensen's inequality function jensen_inequality(X, f) that calculates the expected value of f(X) and the mean value of f(X) for a given random variable X and a function f.
-
-Next, we generate random data X using NumPy's np.random.randn() function. We calculate the corresponding values of the convex function Y by applying convex_function() to each element of X.
-
-Then, we apply Jensen's inequality using jensen_inequality() to calculate the expected value of f(X) and the mean value of f(X) based on the generated data. These values are plotted as dashed lines in the plot.
-
-Finally, we plot the data points, the convex function curve, and the lines representing the expected value of f(X) and the mean value of f(X). We also print the calculated expected value and mean value.
-
-The plot and printed results demonstrate the concept of a convex function and the application of Jensen's inequality.
+#In this code, we define a simple convex function convex_function(x) = x^2. Then, we define the Jensen's inequality function jensen_inequality(X, f) that calculates the expected value of f(X) and the mean value of f(X) for a given random variable X and a function f.
+#Next, we generate random data X using NumPy's np.random.randn() function. We calculate the corresponding values of the convex function Y by applying convex_function() to each element of X.
+#Then, we apply Jensen's inequality using jensen_inequality() to calculate the expected value of f(X) and the mean value of f(X) based on the generated data. These values are plotted as dashed lines in the plot.
+#Finally, we plot the data points, the convex function curve, and the lines representing the expected value of f(X) and the mean value of f(X). We also print the calculated expected value and mean value.
+#The plot and printed results demonstrate the concept of a convex function and the application of Jensen's inequality.
