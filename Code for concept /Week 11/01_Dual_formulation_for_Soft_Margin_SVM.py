@@ -74,6 +74,24 @@ Z = Z.reshape(xx.shape)
 plt.contourf(xx, yy, Z, cmap=plt.cm.RdYlBu, alpha=0.8)
 
 # Plot the training points
-plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=plt.cm.RdYlBu
+plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=plt.cm.RdYlBu, edgecolors='k')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.title('Soft Margin SVM Decision Boundary (Dual Formulation)')
+plt.show()
 
-            
+
+#In this code, we first load the iris dataset and consider only the first two features for simplicity. We keep only two classes for binary classification.
+#We split the dataset into training and testing sets using the train_test_split function. We also perform feature scaling using the StandardScaler.
+#Next, we compute the Gram matrix, which is the dot product of the training samples.
+#We set the hyperparameter C for regularization.
+#We solve the dual optimization problem using Quadratic Programming with the solvers.qp function from the cvxopt library. The objective function and constraints are set up based on the dual formulation of the Soft Margin SVM. The result provides the Lagrange multipliers.
+#We extract the support vectors, their corresponding labels, and their Lagrange multipliers.
+#We compute the bias term based on the support vectors.
+#We make predictions on the testing data by computing the decision function.
+#Finally, we calculate the accuracy of the model, and plot the decision boundary by creating a meshgrid of points spanning the feature space, using the trained model to predict the class labels for those points, and plotting the contour filled with decision regions. We also plot the training points.
+#When you run the code, you should see the decision boundary plot for the Soft Margin SVM using the dual formulation.
+
+
+
+
