@@ -1,43 +1,52 @@
 import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
 
-# Generate some dummy data
-X = np.random.random((1000, 10))
-y = np.random.randint(2, size=(1000, 1))
+class NeuralNetwork:
 
-# Split the data into training and testing sets
-X_train, X_test = X[:800], X[800:]
-y_train, y_test = y[:800], y[800:]
+    def __init__(self, input_size, hidden_size, output_size):
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
 
-# Define the model architecture
-model = keras.Sequential([
-    layers.Dense(16, activation='relu', input_shape=(10,)),
-    layers.Dense(16, activation='relu'),
-    layers.Dense(1, activation='sigmoid')
-])
+        # Initialize the weights and biases
+        self.weights1 = np.random.randn(input_size, hidden_size)
+        self.biases1 = np.random.randn(hidden_size)
+        self.weights2 = np.random.randn(hidden_size, output_size)
+        self.biases2 = np.random.randn(output_size)
 
-# Compile the model
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    def forward(self, x):
+        # Calculate the output of the hidden layer
+        a1 = np.dot(x, self.weights1) + self.biases1
+        h = np.sigmoid(a1)
 
-# Train the model
-model.fit(X_train, y_train, epochs=10, batch_size=32, verbose=1)
+        # Calculate the output of the output layer
+        a2 = np.dot(h, self.weights2) + self.biases2
+        y = np.softmax(a2)
 
-# Evaluate the model on the testing data
-loss, accuracy = model.evaluate(X_test, y_test)
-print("Test Loss:", loss)
-print("Test Accuracy:", accuracy)
+        return y
 
-# Plot the model architecture
-plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+    def train(self, x, y, epochs, learning_rate):
+        for epoch in range(epochs):
+            # Forward pass
+            y_hat = self.forward(x)
 
+            # Calculate the loss
+            loss = -np.mean(y * np.log(y_hat))
 
-#In this code, we first generate some dummy data using np.random.random and np.random.randint.
+            # Backpropagate the loss
+            d_y_hat = y_hat - y
+            d_a2 = d_y_hat * np.exp(a2) / np.sum(np.exp(a2))
+            d_w2 = np.dot(h.T, d_a2)
+            d_b2 = np.sum(d_a2, axis=0)
+            d_h = np.dot(d_a2, self.weights2.T)
+            d_a1 = d_h * sigmoid_prime(a1)
+            d_w1 = np.dot(x.T, d_a1)
+            d_b1 = np.sum(d_a1, axis=0)
 
-#We split the data into training and testing sets.
-#We define the model architecture using keras.Sequential and add layers.Dense layers with various activation functions.
-#We compile the model using model.compile with the chosen optimizer, loss function, and metrics.
-#We train the model using model.fit by providing the training data, number of epochs, and batch size.
-#We evaluate the model on the testing data using model.evaluate and print the test loss and accuracy.
-#This code demonstrates a basic neural network model using Keras for binary classification. You can modify the model architecture, activation functions, optimizer, and loss function to suit your specific needs.
+            # Update the weights and biases
+            self.weights1 += -learning_rate * d_w1
+            self.biases1 += -learning_rate * d_b1
+            self.weights2 += -learning_rate * d_w2
+            self.biases2 += -learning_rate * d_b2
+
+        return loss
+
